@@ -19,17 +19,15 @@
                 <a href="/">Home</a>
               </li>
               <li>
-                 <a href="/events">Catalogue</a>
+                 <a href="#">Catalogue</a>
               </li>
               <li>
-                 <a href="#">About Us</a>
+                 <%= link_to "Catalogue", products_path %>
               </li>   
               <% if user_signed_in? %>
-                <% if current_user.vendor? %>
-                    <li> <%= link_to "Post a Product", new_product_path %></li>
-                <% end %>
-                    <li> <%= link_to "My Profile"  %></li> 
+                  <li> <%= link_to "Post a Product",new_product_path %></li>
               <% end %>
+                  <li> <%= link_to "My Profile"  %></li> 
               <li>
                 <% if user_signed_in? %>
                   <%= link_to "Log out", sessions_logout_path, method: "DELETE" %>
