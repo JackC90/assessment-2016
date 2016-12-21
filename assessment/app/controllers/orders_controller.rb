@@ -12,11 +12,6 @@ class OrdersController < ApplicationController
   def show
   end
 
-  # GET /orders/new
-  def new
-    @order = Order.new
-  end
-
   # GET /orders/1/edit
   def edit
   end
@@ -24,7 +19,7 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    @order = Order.new(order_params.merge(user_id: current_user.id))
 
     respond_to do |format|
       if @order.save
