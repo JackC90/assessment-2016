@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :user_signed_in?
   helper_method :owner_or_admin?
+  include Filterable
   
   def current_user
     session[:user_id] = nil if !User.exists?(session[:user_id])

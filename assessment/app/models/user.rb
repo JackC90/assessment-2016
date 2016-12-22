@@ -17,6 +17,7 @@ class User < ApplicationRecord
 
 	enum role: [:normal, :admin, :vendor]
 
+
 	def encrypt_password
 		if self.password.present?
 			self.salt = BCrypt::Engine.generate_salt
