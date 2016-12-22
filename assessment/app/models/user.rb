@@ -55,5 +55,9 @@ class User < ApplicationRecord
 		  user.oauth_expires_at = Time.at(auth.credentials.expires_at)
 		  user.save(validate: false)
 		end
+
+		where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
+		  user.profile.name = auth.info.name
+		end
 	end
 end

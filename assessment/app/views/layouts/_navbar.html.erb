@@ -36,7 +36,7 @@
                 <% end %>
               </li>
               <li> 
-                <%= link_to "#{current_user.profile.name || current_user.username}", profile(current_user) if user_signed_in?  %>
+                <%= link_to "#{current_user.name || current_user.username || 'My Profile'}", profile_path(current_user.profile) if user_signed_in?  %>
               </li>
             </ul> 
        

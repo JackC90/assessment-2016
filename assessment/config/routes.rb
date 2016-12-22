@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :orders
-  resources :profiles
+  resources :profiles, except: [:index, :new]
   resources :products
 
   # Sessions
