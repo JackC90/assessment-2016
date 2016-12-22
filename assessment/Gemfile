@@ -86,3 +86,6 @@ gem 'rabl-rails'
 
 # Seed 
 gem 'ffaker'
+
+# Braintree
+gem "braintree", "~> 2.69.1"

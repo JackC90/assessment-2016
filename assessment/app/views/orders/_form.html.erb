@@ -16,22 +16,25 @@
 
     <div class="field col-md-3">
       <%= f.label :quantity, class: "control-label" %>
-      <%= f.number_field :quantity, class: "form-control", id: "quantity" %>
+      <%= f.number_field :quantity, class: "form-control", id: "quantity", min: "0" %>
     </div>
 
     <div class="field col-md-3">
-      <%= f.label "Total Price", class: "control-label" %>
-      <%= f.text_field :price, readonly: true, class: "form-control",  id: "total" %>
+        <%= f.label "Total Price", class: "control-label" %>
+        <div class="input-group">
+          <div class="input-group-addon">RM</div>
+          <%= f.number_field :price, readonly: true, class: "form-control",  id: "total", placeholder: "Amount" %>
+      </div>
     </div>
 
 <script>
+// Prints the total price.
 $("#quantity").on("input", function() {
   var quant = parseInt($(this).val());
-  var total = quant * <%= @product.price %>;
-  $(this).val(total);
+  var total = parseFloat(quant * <%= @product.price %>).toFixed(2);
+  var total = parseFloat(isNaN(total) || total < 0 ? 0 : total).toFixed(2);  
+  $("#total").val(total);
 })
-
- 
 </script>
 
     <div class="actions col-md-3">

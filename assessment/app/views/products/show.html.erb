@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
-  <%= image_tag(@product.product_images[0]) %>
+  <%= image_tag(@product.product_images[0].medium) %>
 </div>
 
 <div>
@@ -68,14 +68,16 @@
 </p>
 
 <p>
-  <strong>Isbn:</strong>
+  <strong>ISBN:</strong>
   <%= @product.isbn %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @product.user %>
+  <strong>Available:</strong>
+  <%= @product.stock %> units
 </p>
+
+
 
 <%= render(partial:"orders/new") if @order %>
 
