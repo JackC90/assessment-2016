@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user
   helper_method :user_signed_in?
+  helper_method :owner_or_admin?
   
   def current_user
     session[:user_id] = nil if !User.exists?(session[:user_id])
@@ -10,6 +11,16 @@ class ApplicationController < ActionController::Base
 
   def user_signed_in?
     !current_user.nil?
+  end
+
+  def owner_or_admin?(model)
+    if current_user == model.user
+      return true
+    elsif current_user.admin?
+      return true
+    else
+      return false
+    end
   end
 
   protected

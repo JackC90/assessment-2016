@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <%= image_tag(@product.product_images[0]) %>
+</div>
 
 <p>
   <strong>Title:</strong>
@@ -70,7 +73,7 @@
   <%= @product.user %>
 </p>
 
-<%= render partial:"orders/new" %>
+<%= render(partial:"orders/new") if @order %>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

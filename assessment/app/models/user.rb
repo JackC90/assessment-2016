@@ -14,6 +14,7 @@ class User < ApplicationRecord
 	has_many :orders
 	has_many :transactions, through: :orders, source: :products
 
+
 	enum role: [:normal, :admin, :vendor]
 
 	def encrypt_password
