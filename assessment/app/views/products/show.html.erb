@@ -3,6 +3,10 @@
   <%= image_tag(@product.product_images[0]) %>
 </div>
 
+<div>
+  <%= link_to('Edit', edit_product_path(@product), class: "btn btn-primary col-md-12") if owner_or_admin?(@product) %>
+</div>
+
 <p>
   <strong>Title:</strong>
   <%= @product.title %>
@@ -75,5 +79,3 @@
 
 <%= render(partial:"orders/new") if @order %>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
