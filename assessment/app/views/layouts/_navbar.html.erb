@@ -24,7 +24,10 @@
               <% if user_signed_in? %>
                   <li> <%= link_to "Post a Product",new_product_path %></li>
               <% end %>
-                  <li> <%= link_to "My Profile"  %></li> 
+            </ul>       
+              <!-- Trigger the modal with a button -->
+           
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 130px;">
               <li>
                 <% if user_signed_in? %>
                   <%= link_to "Log out", sessions_logout_path, method: "DELETE" %>
@@ -32,11 +35,8 @@
                   <%= link_to "Login", sessions_login_path %>
                 <% end %>
               </li>
-            </ul>       
-              <!-- Trigger the modal with a button -->
-           
-            <ul class="nav navbar-nav navbar-right" style="margin-right: 130px;">
-              <li>
+              <li> 
+                <%= link_to "#{current_user.profile.name || current_user.username}", profile(current_user) if user_signed_in?  %>
               </li>
             </ul> 
        

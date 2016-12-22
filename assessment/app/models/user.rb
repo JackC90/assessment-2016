@@ -7,6 +7,7 @@ class User < ApplicationRecord
 	validates_length_of :password, in: 6..20, on: :create
 	before_save :encrypt_password
 	after_save 	:clear_password
+	after_save  :create_profile
 
 	has_one :profile
 	has_many :products
@@ -42,5 +43,17 @@ class User < ApplicationRecord
 
 	def match_password(login_password)
 		encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
+	end
+
+	def self.from_omniauth(auth)
+		where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
+		  user.email = auth.info.email if auth.info.email.present?
+		  user.provider = auth.provider
+		  user.uid = auth.uid
+		  user.name = auth.info.name
+		  user.oauth_token = auth.credentials.token
+		  user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+		  user.save(validate: false)
+		end
 	end
 end

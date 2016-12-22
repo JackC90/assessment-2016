@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
   	respond_to do |format|
   		if authorized_user
   			session[:user_id] = authorized_user.id
-  			format.html { redirect_to new_user_path, notice: "You are logged in as #{authorized_user.username}!" }
+  			format.html { redirect_to products_path, notice: "You are logged in as #{authorized_user.username}!" }
   			format.json { render :show, status: :created, location: root_path }
   		else
   			format.html { render "sessions/login", notice: "Failed to log in." }
@@ -21,7 +21,13 @@ class SessionsController < ApplicationController
 
   def logout
   	session[:user_id] 	= nil
- 	@current_user 		= nil
+ 	  @current_user 		= nil
   	redirect_to controller: "sessions", action: "login"
+  end
+
+  def create
+    user = User.from_omniauth(env["omniauth.auth"])
+    session[:user_id] = user.id
+    redirect_to root_path
   end
 end
