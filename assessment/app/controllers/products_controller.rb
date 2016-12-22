@@ -10,7 +10,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @order = @product.orders.new(user_id: current_user.id)
+      @order = @product.orders.new(user_id: current_user.id) if user_signed_in?
   end
 
   # GET /products/new
@@ -19,21 +19,28 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1/edit
-  def edit
+  def edit    
+    unless user_signed_in? && owner_or_admin?(@product)
+      respond_to do |format|
+        format.html { redirect_to @product }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
+    if user_signed_in?
+      @product = Product.new(product_params)
+      respond_to do |format|
+        if @product.save
+          format.html { redirect_to @product, notice: 'Product was successfully created.' }
+          format.json { render :show, status: :created, location: @product }
+        else
+          format.html { render :new }
+          format.json { render json: @product.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -54,11 +61,13 @@ class ProductsController < ApplicationController
 
   # DELETE /products/1
   # DELETE /products/1.json
-  def destroy
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-      format.json { head :no_content }
+  def destroy  
+    if user_signed_in? && owner_or_admin?(@product)
+      @product.destroy
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -70,6 +79,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:title, :price, :category, :sale_or_rent, :description, :ages, :format, :pages, :publication_date, :publisher, :publication_city, :language, :isbn, :user_id, :stock)
+      params.require(:product).permit(:title, :price, :category, :sale_or_rent, :description, :ages, :format, :pages, :publication_date, :publisher, :publication_city, :language, :isbn, :user_id, :stock, {product_images: []})
     end
 end

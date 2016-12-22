@@ -11,42 +11,43 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class="field col-md-10">
+    <%= f.label :name, class: "control-label"  %>
+    <%= f.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
+  <div class="field col-md-10">
+    <%= f.label :description, class: "control-label"  %>
+    <%= f.text_area :description, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :whatsapp %>
+  <div class="field col-md-10">
+    <%= f.label :whatsapp, class: "control-label"  %>
     <%= f.check_box :whatsapp %>
   </div>
 
-  <div class="field">
-    <%= f.label :phone %>
-    <%= f.text_field :phone %>
+  <div class="field col-md-10">
+    <%= f.label :phone, class: "control-label"  %>
+    <%= f.text_field :phone, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :birthdate %>
-    <%= f.date_select :birthdate %>
+  <div class="field col-md-10">
+    <%= f.label :birthdate, class: "control-label"  %>
+    <%= f.date_select :birthdate, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :address %>
-    <%= f.text_area :address %>
+  <div class="field col-md-10">
+    <%= f.label :address, class: "control-label"  %>
+    <%= f.text_area :address, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.text_field :user_id %>
+  <div class="field col-md-10">
+    <%= f.label "Profile Picture", class: "control-label"  %>
+    <%= f.file_field :avatar, class: "form-control" %>
   </div>
+  <% end %>
 
-  <div class="actions">
+  <div class="actions col-md-10">
     <%= f.submit %>
   </div>
 <% end %>

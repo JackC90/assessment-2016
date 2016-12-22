@@ -2,12 +2,17 @@
 
 <p>
   <strong>Product:</strong>
-  <%= @order.product %>
+  <%= link_to @order.product.title, @order.product %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @order.user %>
+  <strong>Customer:</strong>
+  <%= link_to @order.user.username, @order.user.profile %>
+</p>
+
+<p>
+  <strong>Vendor:</strong>
+  <%= link_to @order.product.user.username, @order.product.user.profile %>
 </p>
 
 <p>
@@ -20,5 +25,6 @@
   <%= @order.price %>
 </p>
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to "Pay Now", new_order_checkout_path(@order) %>
+
+<%= link_to('Payment Index', orders_path) if user_signed_in? && current_user.admin? %>

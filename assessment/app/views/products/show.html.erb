@@ -1,4 +1,11 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <%= image_tag(@product.product_images[0].medium) %>
+</div>
+
+<div>
+  <%= link_to('Edit', edit_product_path(@product), class: "btn btn-primary col-md-12") if owner_or_admin?(@product) %>
+</div>
 
 <p>
   <strong>Title:</strong>
@@ -61,16 +68,16 @@
 </p>
 
 <p>
-  <strong>Isbn:</strong>
+  <strong>ISBN:</strong>
   <%= @product.isbn %>
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @product.user %>
+  <strong>Available:</strong>
+  <%= @product.stock %> units
 </p>
 
-<%= render partial:"orders/new" %>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+
+<%= render(partial:"orders/new") if @order %>
+

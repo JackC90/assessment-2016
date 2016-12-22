@@ -1,29 +1,44 @@
-<%= form_for(order) do |f| %>
-  <% if order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<div class="container">  
+  <%= form_for(order, class: "form-inline") do |f| %>
+    <% if order.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-      <ul>
-      <% order.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% order.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= f.hidden_field :product_id, value: @product.id %>
+
+    <div class="field col-md-3">
+      <%= f.label :quantity, class: "control-label" %>
+      <%= f.number_field :quantity, class: "form-control", id: "quantity", min: "0" %>
+    </div>
+
+    <div class="field col-md-3">
+        <%= f.label "Total Price", class: "control-label" %>
+        <div class="input-group">
+          <div class="input-group-addon">RM</div>
+          <%= f.number_field :price, readonly: true, class: "form-control",  id: "total", placeholder: "Amount" %>
+      </div>
+    </div>
+
+<script>
+// Prints the total price.
+$("#quantity").on("input", function() {
+  var quant = parseInt($(this).val());
+  var total = parseFloat(quant * <%= @product.price %>).toFixed(2);
+  var total = parseFloat(isNaN(total) || total < 0 ? 0 : total).toFixed(2);  
+  $("#total").val(total);
+})
+</script>
+
+    <div class="actions col-md-3">
+      <%= f.submit %>
     </div>
   <% end %>
-
-  <%= f.hidden_field :product_id, value: @product.id %>
-
-  <div class="field">
-    <%= f.label :quantity %>
-    <%= f.number_field :quantity %>
-  </div>
-
-  <div class="field">
-    <%= f.label :price %>
-    <%= f.text_field :price %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
