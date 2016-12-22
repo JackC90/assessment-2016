@@ -30,10 +30,6 @@
   <%= @profile.address %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @profile.user %>
-</p>
 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+<%= link_to 'Back', profiles_path if current_user.admin? %>
