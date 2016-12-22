@@ -28,13 +28,12 @@
               <!-- Trigger the modal with a button -->
            
             <ul class="nav navbar-nav navbar-right" style="margin-right: 130px;">
-              <li>
                 <% if user_signed_in? %>
-                  <%= link_to "Log out", sessions_logout_path, method: "DELETE" %>
+                  <li><%= link_to "Log out", sessions_logout_path, method: "DELETE" %></li>
                 <% else %>
-                  <%= link_to "Login", sessions_login_path %>
+                  <li><%= link_to "Login", sessions_login_path %></li>
+                  <li><%= link_to "Sign Up", new_user_path %></li>
                 <% end %>
-              </li>
               <li> 
                 <%= link_to "#{current_user.name || current_user.username || 'My Profile'}", profile_path(current_user.profile) if user_signed_in?  %>
               </li>

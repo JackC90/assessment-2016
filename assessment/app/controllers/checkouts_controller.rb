@@ -1,4 +1,5 @@
 class CheckoutsController < ApplicationController
+	skip_before_filter :verify_authenticity_token, only: [:create] 
 	def new
 		@token = Braintree::ClientToken.generate
 		@order = Order.find(params[:order_id])
