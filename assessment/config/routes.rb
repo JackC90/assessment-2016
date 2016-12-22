@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :orders
+  resources :orders, only: [:index, :show, :create, :destroy] do
+    resources :checkouts, only: [:new, :create, :show]
+  end
   resources :profiles, except: [:index, :new]
   resources :products
 

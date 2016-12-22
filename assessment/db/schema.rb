@@ -10,19 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222081244) do
+ActiveRecord::Schema.define(version: 20161222132837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "checkouts", force: :cascade do |t|
+    t.decimal  "amount"
+    t.text     "token"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_checkouts_on_order_id", using: :btree
+  end
 
   create_table "orders", force: :cascade do |t|
     t.integer  "product_id"
     t.integer  "user_id"
     t.integer  "quantity"
     t.decimal  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean  "paid"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "paid",       default: false
     t.index ["product_id"], name: "index_orders_on_product_id", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
@@ -78,6 +87,7 @@ ActiveRecord::Schema.define(version: 20161222081244) do
     t.datetime "oauth_expires_at"
   end
 
+  add_foreign_key "checkouts", "orders"
   add_foreign_key "orders", "products"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "users"
