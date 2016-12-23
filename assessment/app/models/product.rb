@@ -18,7 +18,7 @@ class Product < ApplicationRecord
 	enum language: [:English, :Malay, :Chinese, :Tamil, :French, :Japanese, :other_languages]
 
 	# Scopes for Searching
-	pg_search_scope :search_string, :against => [:title, :description], using: {tsearch: {dictionary: "english"}}
+	pg_search_scope :search_string, :against => [:title, :description, :author], using: {tsearch: {dictionary: "english"}}
 	pg_search_scope :search_isbn, :against => [:isbn]
 	scope :category, 		-> (category) { where(category: category) }
 	scope :sale_or_rent, 	-> (sale_or_rent) { where(sale_or_rent: sale_or_rent) }

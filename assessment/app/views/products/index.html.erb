@@ -54,4 +54,16 @@
 
 <br>
 
-<%= link_to 'New Product', new_product_path %>
+
+<% @products.each do |product| %>
+  <div class="products container col-md-10">
+    <div class="card col-md-2">
+      <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card-block">
+        <h4 class="card-title"><%= product.title %></h4>
+        <p class="card-text"><%= RM product.price %></p>
+        <p class="card-text"><small class="text-muted"><%= product.author %></small></p>
+      </div>
+    </div>
+  </div>
+<% end %>

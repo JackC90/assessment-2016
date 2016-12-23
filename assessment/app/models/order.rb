@@ -7,8 +7,9 @@ class Order < ApplicationRecord
 
   def total_price
   	unit_price 	= self.product.price.to_f
+    discounted = 1.00 - (self.product.discount * 0.01)
   	quantity 	= self.quantity
-  	total = (quantity * unit_price).round(2)
+  	total = (quantity * unit_price * discounted).round(2)
   	self.price = total
   end
 end

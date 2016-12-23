@@ -31,7 +31,7 @@
 // Prints the total price.
 $("#quantity").on("input", function() {
   var quant = parseInt($(this).val());
-  var total = parseFloat(quant * <%= @product.price %>).toFixed(2);
+  var total = parseFloat(quant * <%= @product.price %> * <%= 1.00 - (@product.discount * 0.01) %>).toFixed(2);
   var total = parseFloat(isNaN(total) || total < 0 ? 0 : total).toFixed(2);  
   $("#total").val(total);
 })

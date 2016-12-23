@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 <div class="container">
-  <%= image_tag(@product.product_images[0].medium) %>
+  <%= image_tag(@product.product_images[0].medium, width: 260, height: 400) %>
 </div>
 
 <div>
@@ -13,18 +13,23 @@
 </p>
 
 <p>
+  <strong>Author:</strong>
+  <%= @product.author %>
+</p>
+
+<p>
   <strong>Price:</strong>
-  <%= @product.price %>
+  <%= RM @product.price %> | -<%= @product.discount %>%
 </p>
 
 <p>
   <strong>Category:</strong>
-  <%= @product.category %>
+  <%=  @product.category.humanize %>
 </p>
 
 <p>
   <strong>Sale or rent:</strong>
-  <%= @product.sale_or_rent %>
+  <%=  @product.sale_or_rent.humanize %>
 </p>
 
 <p>
@@ -39,7 +44,7 @@
 
 <p>
   <strong>Format:</strong>
-  <%= @product.format %>
+  <%= @product.format.humanize %>
 </p>
 
 <p>
@@ -49,7 +54,7 @@
 
 <p>
   <strong>Publication date:</strong>
-  <%= @product.publication_date %>
+  <%= format_date @product.publication_date %>
 </p>
 
 <p>
@@ -64,7 +69,7 @@
 
 <p>
   <strong>Language:</strong>
-  <%= @product.language %>
+  <%=  @product.language.humanize %>
 </p>
 
 <p>
