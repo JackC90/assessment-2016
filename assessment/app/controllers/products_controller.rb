@@ -3,8 +3,14 @@ class ProductsController < ApplicationController
 
   # GET /products
   # GET /products.json
-  def index
-    @products = Product.filter(filtering_params)
+  def index 
+    if params[:search]
+      filtering_params = params[:search].slice(:search_string, :search_isbn, :category, :format, :language, :price_above, :price_below, :sale_or_rent, :pages_above, :pages_below)
+      @products = Product.filter(filtering_params)
+    else 
+      @products = Product.all
+    end
+    # byebug
   end
 
   # GET /products/1
@@ -80,8 +86,5 @@ class ProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
       params.require(:product).permit(:title, :price, :category, :sale_or_rent, :description, :ages, :format, :pages, :publication_date, :publisher, :publication_city, :language, :isbn, :user_id, :stock, {product_images: []})
-    end
-
-    def filtering_params
     end
 end
