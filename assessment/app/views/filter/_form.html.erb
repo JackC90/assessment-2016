@@ -20,7 +20,7 @@
         </div>
         <div class="field col-md-3">
             <%= f.label :language, class: "control-label" %>
-            <%= f.text_field :language %>
+            <%= f.select :language, Product.languages.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
         </div>
         <div class="field col-md-3">
             <%= f.label :price_above, "Priced between RM", class: "control-label" %>
