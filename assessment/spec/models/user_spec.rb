@@ -44,24 +44,19 @@ context "validations" do
   	end
 
   	describe "should only permit valid email" do
-  		let(:valid_user) { User.create(username: "new321", email: "hello@mail.com", password: "123456", password_confirmation: "123456") }
-  		let(:invalid_user) { User.create(username: "new4321", email: "hellomail.com", password: "123456", password_confirmation: "123456") }
+  		When(:valid_user) { User.create(username: "new321", email: "hello@mail.com", password: "123456", password_confirmation: "123456") }
+  		Then { valid_user.valid? == true }
+  	end
 
-  		# happy_path
-  		it "will sign up with valid email" do
-  			expect(valid_user).to be_valid
-  		end
-  		
-  		# unhappy_path
-  		it "will not sign up with invalid email" do
-  			expect(invalid_user).to_not be_valid
-  		end
+  	describe "should not permit invalid email" do	
+  		When(:invalid_user) { User.create(username: "new4321", email: "hellomail.com", password: "123456", password_confirmation: "123456") }
+  		Then { invalid_user.valid? == false }
   	end
   end
 
-  	context "association with dependencies" do
-  		it { is_expected.to have_many(:products).dependent(:destroy) }
-  		it { is_expected.to have_many(:orders).dependent(:destroy) }
-  		it { is_expected.to have_one(:profile).dependent(:destroy) }
-  	end  
+	context "association with dependencies" do
+		it { is_expected.to have_many(:products).dependent(:destroy) }
+		it { is_expected.to have_many(:orders).dependent(:destroy) }
+		it { is_expected.to have_one(:profile).dependent(:destroy) }
+	end  
 end
