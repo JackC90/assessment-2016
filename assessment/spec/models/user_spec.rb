@@ -23,7 +23,7 @@ context "validations" do
   	end
 
   	describe "validates password" do
-  		it { is_expected.to validate_presence_of(:password) }
+  		it { is_expected.to validate_length_of(:password) }
   	end
 
   	# happy_path

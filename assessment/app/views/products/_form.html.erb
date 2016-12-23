@@ -63,7 +63,7 @@
 
   <div class="field col-md-10">
     <%= f.label :publication_date, class: "control-label" %>
-    <%= f.date_select :publication_date, class: "form-control", start_year: 1500 %>
+    <%= f.text_field :publication_date, class: "datepicker form-control" %>
   </div>
 
   <div class="field col-md-10">
@@ -92,6 +92,15 @@
   </div>
 
   <div class="actions col-md-10">
-    <%= f.submit %>
+    <%= f.submit "Save and Submit" %>
   </div>
 <% end %>
+
+<script>
+$(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            yearRange: "-400:+0",
+        });
+</script>

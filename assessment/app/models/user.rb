@@ -3,7 +3,7 @@ class User < ApplicationRecord
 	EMAIL_REG = /.+@.+/i 
 	validates :username, presence: true, uniqueness: true, length: {in: 3..20}
 	validates :email, presence: true, uniqueness: true, format: EMAIL_REG
-	validates :password, presence: true, confirmation: true
+	validates :password, confirmation: true
 	validates_length_of :password, in: 6..20, on: :create
 	before_save :encrypt_password
 	after_save 	:clear_password
