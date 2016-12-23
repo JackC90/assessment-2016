@@ -18,7 +18,7 @@
 
   <div class="field col-md-10">
     <%= f.label :product_images, class: "control-label" %>
-    <%= f.file_field :product_images, class: "form-control-file", multiple: true %>
+    <%= f.file_field :product_images, class: "form-control-file", multiple: true, class: "selectpicker" %>
   </div>
 
   <div class="field col-md-10">
@@ -27,13 +27,18 @@
   </div>
 
   <div class="field col-md-10">
+    <%= f.label :discount, "Discount (%)", class: "control-label" %>
+    <%= f.number_field :discount, class: "form-control" %>
+  </div>
+
+  <div class="field col-md-10">
     <%= f.label :category, class: "control-label" %>
-    <%= f.number_field :category, class: "form-control" %>
+    <%= f.select :category, Product.categories.keys.to_a.map {|e| [e.humanize, e] }, include_blank: true %>
   </div>
 
   <div class="field col-md-10">
     <%= f.label :sale_or_rent, class: "control-label" %>
-    <%= f.number_field :sale_or_rent, class: "form-control" %>
+    <%= f.select :sale_or_rent, Product.sale_or_rents.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
   </div>
 
   <div class="field col-md-10">
@@ -48,7 +53,7 @@
 
   <div class="field col-md-10">
     <%= f.label :format, class: "control-label" %>
-    <%= f.number_field :format, class: "form-control" %>
+    <%= f.select :format, Product.formats.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
   </div>
 
   <div class="field col-md-10">
@@ -58,7 +63,7 @@
 
   <div class="field col-md-10">
     <%= f.label :publication_date, class: "control-label" %>
-    <%= f.date_select :publication_date, class: "form-control" %>
+    <%= f.date_select :publication_date, class: "form-control", start_year: 1500 %>
   </div>
 
   <div class="field col-md-10">
@@ -73,7 +78,7 @@
 
   <div class="field col-md-10">
     <%= f.label :language, class: "control-label" %>
-    <%= f.text_field :language, class: "form-control" %>
+    <%= f.select :language, Product.languages.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
   </div>
 
   <div class="field col-md-10">

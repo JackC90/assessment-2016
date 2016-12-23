@@ -1,37 +1,38 @@
 <div class="search-form">
     <h4>Filter/Search</h4>
-    <div class="col-md-5">
-        <%= form_for :search, url: products_path do |f| %>
-        </br>
-        <%= f.label "Search" %>
-        <%= f.text_field(:search_string, placeholder: "Search") %>
-        </br>
-        <%= f.label "Search by ISBN" %>
-        <%= f.text_field(:search_isbn, placeholder: "Search ISBN") %>
-        </br>
-        <%= f.label :format %>
-        <%= f.number_field :format %>
-
-        <%= f.label :language %>
-        <%= f.text_field :language %>
-
-        <%= f.label :price_above, "Priced Above" %>
-        <%= f.number_field :price_above %>
-        </br>
-        <%= f.label :price_below, "Priced Below" %>
-        <%= f.number_field :price_below %>
-        </br>
-        <%= f.label :category %>
-        <%= f.number_field :category %>
-        </br>
-        <%= f.label :sale_or_rent %>
-        <%= f.number_field :sale_or_rent %>
-        </br>
-        <%= f.label :pages_above %>
-        <%= f.number_field :pages_above %>
-        </br>
-        <%= f.label :pages_below %>
-        <%= f.number_field :pages_below %>
+    <div class="col-md-12">
+            <%= form_for :search, url: products_path, method: "GET" do |f| %>
+        <div class="field col-md-3">
+            <%= f.label "Search", class: "control-label" %>
+            <%= f.text_field(:search_string, placeholder: "Search", class: "form-control") %>
+        </div>
+        <div class="field col-md-3">
+            <%= f.label "Search by ISBN", class: "control-label" %>
+            <%= f.text_field(:search_isbn, placeholder: "Search ISBN", class: "form-control") %>
+        </div>
+        <div class="field col-md-3">
+            <%= f.label :category, class: "control-label" %>
+            <%= f.select :category, Product.categories.keys.to_a.map {|e| [e.humanize, e] }, include_blank: true %>
+        </div>
+        <div class="field col-md-3">
+            <%= f.label :format, class: "control-label" %>
+            <%= f.select :format, Product.formats.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
+        </div>
+        <div class="field col-md-3">
+            <%= f.label :language, class: "control-label" %>
+            <%= f.select :language, Product.languages.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
+        </div>
+        <div class="field col-md-3">
+            <%= f.label :price_above, "Priced between RM", class: "control-label" %>
+            <%= f.number_field :price_above, class: "form-control" %>
+            <%= f.label :price_below, " to RM", class: "control-label" %>
+            <%= f.number_field :price_below, class: "form-control" %>
+        </div>
+        <div class="field col-md-3">
+            <%= f.label :sale_or_rent, class: "control-label" %>
+            <%= f.select :sale_or_rent, Product.sale_or_rents.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
+        </div>
+        <%= f.submit "Search" %>
     </div>
     <% end %>
 </div>

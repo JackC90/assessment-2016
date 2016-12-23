@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222132837) do
+ActiveRecord::Schema.define(version: 20161223022326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20161222132837) do
     t.date     "publication_date"
     t.string   "publisher"
     t.string   "publication_city"
-    t.string   "language"
+    t.integer  "language",         default: 0
     t.string   "isbn"
     t.integer  "user_id"
     t.datetime "created_at",                   null: false
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20161222132837) do
     t.string   "title"
     t.integer  "stock",            default: 0
     t.json     "product_images"
+    t.integer  "discount",         default: 0
     t.index ["user_id"], name: "index_products_on_user_id", using: :btree
   end
 
