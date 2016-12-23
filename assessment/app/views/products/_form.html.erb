@@ -18,7 +18,7 @@
 
   <div class="field col-md-10">
     <%= f.label :product_images, class: "control-label" %>
-    <%= f.file_field :product_images, class: "form-control-file", multiple: true, class: "selectpicker" %>
+    <%= f.file_field :product_images, class: "form-control-file", multiple: true %>
   </div>
 
   <div class="field col-md-10">
@@ -33,12 +33,12 @@
 
   <div class="field col-md-10">
     <%= f.label :category, class: "control-label" %>
-    <%= f.select :category, Product.categories.keys.to_a.map {|e| [e.humanize, e] }, include_blank: true %>
+    <%= f.select :category, Product.categories.keys.to_a.map {|e| [e.humanize, e] }, include_blank: true, class: "selectpicker" %>
   </div>
 
   <div class="field col-md-10">
     <%= f.label :sale_or_rent, class: "control-label" %>
-    <%= f.select :sale_or_rent, Product.sale_or_rents.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
+    <%= f.select :sale_or_rent, Product.sale_or_rents.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true, class: "selectpicker" %>
   </div>
 
   <div class="field col-md-10">
@@ -53,7 +53,7 @@
 
   <div class="field col-md-10">
     <%= f.label :format, class: "control-label" %>
-    <%= f.select :format, Product.formats.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
+    <%= f.select :format, Product.formats.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true, class: "selectpicker" %>
   </div>
 
   <div class="field col-md-10">
@@ -78,7 +78,7 @@
 
   <div class="field col-md-10">
     <%= f.label :language, class: "control-label" %>
-    <%= f.select :language, Product.languages.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
+    <%= f.select :language, Product.languages.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true, class: "selectpicker" %>
   </div>
 
   <div class="field col-md-10">

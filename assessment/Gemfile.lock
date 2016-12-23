@@ -48,6 +48,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-select-rails (1.6.3)
     braintree (2.69.1)
       builder (>= 2.0.0)
     builder (3.2.2)
@@ -356,6 +357,8 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    shoulda-matchers (3.1.1)
+      activesupport (>= 4.0.0)
     sidekiq (4.2.7)
       concurrent-ruby (~> 1.0)
       connection_pool (~> 2.2, >= 2.2.0)
@@ -408,6 +411,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootstrap-sass (~> 3.3.3)
+  bootstrap-select-rails
   braintree (~> 2.69.1)
   byebug
   capybara
@@ -435,6 +439,7 @@ DEPENDENCIES
   rspec-given
   rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
+  shoulda-matchers
   sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)

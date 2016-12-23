@@ -5,12 +5,12 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index 
     if params[:search]
-      filtering_params = params[:search].slice(:search_string, :search_isbn, :category, :format, :language, :price_above, :price_below, :sale_or_rent, :pages_above, :pages_below)
+      filtering_params = params[:search].slice(:search_string, :search_isbn, :category, :product_format, :language, :price_above, :price_below, :sale_or_rent, :pages_above, :pages_below)
       @products = Product.filter(filtering_params)
+      # byebug
     else 
       @products = Product.all
     end
-    # byebug
   end
 
   # GET /products/1

@@ -12,15 +12,15 @@
         </div>
         <div class="field col-md-3">
             <%= f.label :category, class: "control-label" %>
-            <%= f.select :category, Product.categories.keys.to_a.map {|e| [e.humanize, e] }, include_blank: true %>
+            <%= f.select :category, Product.categories.keys.to_a.map {|e| [e.humanize, e] }, include_blank: true, class: "selectpicker" %>
         </div>
         <div class="field col-md-3">
-            <%= f.label :format, class: "control-label" %>
-            <%= f.select :format, Product.formats.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
+            <%= f.label :product_format, class: "control-label" %>
+            <%= f.select :product_format, Product.formats.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true, class: "selectpicker" %>
         </div>
         <div class="field col-md-3">
             <%= f.label :language, class: "control-label" %>
-            <%= f.select :language, Product.languages.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
+            <%= f.select :language, Product.languages.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true, class: "selectpicker" %>
         </div>
         <div class="field col-md-3">
             <%= f.label :price_above, "Priced between RM", class: "control-label" %>
@@ -30,7 +30,7 @@
         </div>
         <div class="field col-md-3">
             <%= f.label :sale_or_rent, class: "control-label" %>
-            <%= f.select :sale_or_rent, Product.sale_or_rents.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true %>
+            <%= f.select :sale_or_rent, Product.sale_or_rents.keys.to_a.map {|e| [e.humanize, e]}, include_blank: true, class: "selectpicker" %>
         </div>
         <%= f.submit "Search" %>
     </div>

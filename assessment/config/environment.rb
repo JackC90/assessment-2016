@@ -4,5 +4,6 @@ require 'carrierwave/orm/activerecord'
 require 'braintree'
 
 
+
 # Initialize the Rails application.
 Rails.application.initialize!
