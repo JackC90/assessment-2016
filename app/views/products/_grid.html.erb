@@ -1,0 +1,12 @@
+<h2>Products</h2>
+<% products.each do |product| %>
+    <%= render "products/card", product: product %>
+<% end %>
+<div class="container col-md-12 text-center">
+	<%= will_paginate products, renderer: BootstrapPagination::Rails, class: "will_paginate text-center" %>
+	<%= page_entries_info products%>
+</div>
+
+
+
+

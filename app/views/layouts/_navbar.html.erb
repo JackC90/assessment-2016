@@ -1,0 +1,52 @@
+<div>
+    <nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+      <div class="navbar-container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" id="navbar-brand" href="/">Assessment</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li>
+                <%= link_to "Catalogue", products_path %>
+              </li>
+              <li>
+                 <%= render partial:"layouts/search_bar" %>
+              </li> 
+                 
+              <li>
+                <a data-toggle="collapse" href="#collapse1">Advanced Search</a>
+              </li>
+              <li>
+                <%= render partial:"layouts/panel" %>
+              </li>
+            </ul>       
+
+           
+            <ul class="nav navbar-nav navbar-right" style="margin-right: 130px;">
+                <% if user_signed_in? %>
+                  <li><%= link_to "Post a Product",new_product_path, class: "btn btn-warning", style:"color:black" %>
+                  </li>
+                <% end %>  
+                <% if user_signed_in? %>
+                  <li><%= link_to "Log out", sessions_logout_path, method: "DELETE" %></li>
+                <% else %>
+                  <li><%= link_to "Login", sessions_login_path %></li>
+                  <li><%= link_to "Sign Up", new_user_path %></li>
+                <% end %>
+              <li> 
+                <%= link_to print_name(current_user.profile), profile_path(current_user.profile) if user_signed_in?  %>
+              </li>
+            </ul> 
+       
+        </div>
+      </div><!-- /.container -->
+    </nav><!-- /#bs-example-navbar-collapse-1 -->
+  </div>

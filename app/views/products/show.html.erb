@@ -1,0 +1,117 @@
+<p id="notice"><%= notice %></p>
+<div class="container col-md-8">
+  <div class="product-show-img container col-md-5">
+    <%= image_tag(@img, class: 'img-responsive img-hover img-related') %>
+  </div>
+
+  <div>
+    
+  </div>
+
+  <div class="product-details col-md-7">
+    <p>
+      <strong>Posted by
+        <%= link_to print_name(@product.user.profile), profile_path(@product.user.profile) %>
+      </strong>
+    </p>
+    <%= link_to('Edit Product', edit_product_path(@product), class: "btn btn-primary btn-block") if owner_or_admin?(@product) %>
+
+    <p>
+      <h3>
+        <strong><%= @product.title %></strong>
+      </h3>  
+    </p>
+
+    <p>
+      <strong>Author:</strong>
+      <%= @product.author %>
+    </p>
+
+    <p>
+      <strong>Sale or rent:</strong>
+      <%=  @product.sale_or_rent.humanize %>
+    </p>
+
+    <p>
+      <strong>Price:</strong>
+      <%= RM discounted(@product) %> <%= @product.for_rent? ? "/month" : "" %> |
+      <span class="text-muted"><strike><%= RM @product.price %></strike>       -<%= @product.discount %>%</span>
+    </p>
+
+    <p>
+      <strong>Category:</strong>
+      <%=  @product.category.humanize %>
+    </p>
+
+    <p>
+      <strong>Description</strong>
+      <p>
+        <%= @product.description %>
+      </p>
+    </p>
+
+    <p>
+      <strong>Ages:</strong>
+      <%= @product.ages %> and above
+    </p>
+
+    <p>
+      <strong>Format:</strong>
+      <%= @product.format.humanize %>
+    </p>
+
+    <p>
+      <strong>Pages:</strong>
+      <%= @product.pages %>
+    </p>
+
+    <p>
+      <strong>Publication date:</strong>
+      <%= format_date @product.publication_date %>
+    </p>
+
+    <p>
+      <strong>Publisher:</strong>
+      <%= @product.publisher %>
+    </p>
+
+    <p>
+      <strong>Publication city:</strong>
+      <%= @product.publication_city %>
+    </p>
+
+    <p>
+      <strong>Language:</strong>
+      <%=  @product.language.humanize %>
+    </p>
+
+    <p>
+      <strong>ISBN:</strong>
+      <%= @product.isbn %>
+    </p>
+
+    <p>
+      <strong>Available:</strong>
+      <%= @product.stock %> units
+    </p>
+  </div>
+</div>
+
+
+<div class="card col-md-3">
+  <%= render(partial:"orders/new") if @order %>
+</div>
+
+<div class="order-card container col-md-3">
+</div>
+
+
+<div class="products container col-md-12">
+  <h3>
+    Related Products
+  </h3>
+  <% @products.each do |product| %>
+    <%= render "products/card", product: product %>
+  <% end %>
+</div>
+

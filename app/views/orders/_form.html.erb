@@ -1,0 +1,82 @@
+<h4>Make an Order</h4> 
+<div class="card-block">
+<%= form_for(order, class: "form-inline") do |f| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :product_id, value: @product.id %>
+
+  <div class="field">
+    <%= f.label :quantity, class: "control-label" %>
+    <%= f.number_field :quantity, class: "form-control", id: "quantity", min: "0", max: @product.stock, placeholder: "Number of units", value: 1 %>
+  </div>
+
+  <% if @product.for_rent? %>
+    <div class="field">
+      <%= f.label :duration, class: "control-label" %>
+      <span class="text-muted">(Maximum: <%= pluralize @product.duration, "month" %>)</span>
+      
+      <div class="input-group">
+        <%= f.number_field :duration, class: "form-control", id: "duration", min: "1", max: @product.duration, value: 1 %>
+        <div class="input-group-addon">
+          Month(s)
+        </div>
+      </div>
+      
+      <div class="card text-center">
+        <strong>Due on </strong><span id="due_date"><%= (Date.today + 1.month).strftime("%a %b %e %Y") %></span>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label "Total Price", class: "control-label" %>
+    <div class="input-group">
+      <div class="input-group-addon">RM</div>
+        <%= f.number_field :price, readonly: true, class: "form-control",  id: "total", placeholder: "Amount" %>
+      <div class="input-group-btn">
+        <%= f.submit "Order Now!", class: "btn btn-default", id: "submit-order", remote: true %>
+      </div>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<script>
+// Prints the total price.
+var total_price = function(quant, price, discount, duration) {
+  var total = parseFloat(quant * duration * price * (1.00 - (discount * 0.01))).toFixed(2);
+    var total = parseFloat(isNaN(total) || total < 0 ? 0 : total).toFixed(2);
+    return total
+}
+
+$("#quantity, #duration").on("input", function() {
+  var quant = parseInt($("#quantity").val());
+  var price = <%= @product.price %>
+  var discount = <%= @product.discount %>
+   
+  if (<%= @product.for_sale? %>) {
+    var duration = 1
+  } else {
+    var duration = parseInt($("#duration").val());
+    
+    // Calculate Due Date
+    var DueDate = new Date();
+    DueDate.setMonth(DueDate.getMonth() + duration);
+    $("#due_date").text(DueDate.toDateString())
+  }
+
+  var total = total_price(quant, price, discount, duration)
+  $("#total").val(total);
+})
+
+</script>

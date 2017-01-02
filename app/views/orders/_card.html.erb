@@ -1,0 +1,48 @@
+<div class="well">
+  <p id="notice"><%= notice %></p>
+  <h4>
+    Order Summary
+  </h4>
+  <p>
+    <strong>Product:</strong>
+    <%= link_to order.product.title, order.product %>
+  </p>
+
+  <p>
+    <strong>Customer:</strong>
+    <%= link_to print_name(order.user.profile), order.user.profile %>
+  </p>
+
+  <p>
+    <strong>Vendor:</strong>
+    <%= link_to print_name(order.product.user.profile), order.product.user.profile %>
+  </p>
+
+  <p>
+    <strong>Quantity:</strong>
+    <%= order.quantity %>
+  </p>
+
+  <% if order.product.for_rent? %>
+    <p>
+      <strong>Duration:</strong>
+      <%= order.duration %> months
+    </p>
+
+    <p>
+      <strong>Due Date:</strong>
+      <%= format_date order.due_date %>
+    </p>
+  <% end %>
+
+  <p>
+    <strong>Price:</strong>
+    <%= RM order.price %>
+  </p>
+
+  <%= link_to 'Cancel Order', order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" %>
+
+  <%= link_to "Pay Now", new_order_checkout_path(order), class: "btn btn-success" %>
+
+  <%= link_to('Payment Index', orders_path, class: "btn btn-primary") if user_signed_in? && current_user.admin? %>
+</div>

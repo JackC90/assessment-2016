@@ -1,0 +1,9 @@
+<h1>Editing Profile</h1>
+
+	<%= render 'form', profile: @profile %>
+
+
+<div class="container col-md-10" style="margin: 1em">
+  <%= link_to "Back to Profile", profile_path(@profile), class: "btn btn-default" %>
+</div>
+<%= link_to 'Profiles Index', profiles_path if current_user.admin? %>

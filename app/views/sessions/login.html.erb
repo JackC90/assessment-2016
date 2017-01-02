@@ -1,0 +1,22 @@
+<div class="signup-form container">
+	<h1>Log In</h1>
+	<%= form_tag(url: sessions_login_path, method: "POST") do %>
+		<div class="col-md-10">
+			<%= label_tag "Username or Email", nil, class: "control-label" %>
+			<%= text_field_tag :username_or_email, nil, class: "form-control" %>
+		</div>
+		<div class="col-md-10">
+			<%= label_tag "Password", nil, class: "control-label" %>
+			<%= password_field_tag :login_password, nil, class: "form-control" %>
+		</div>
+		
+		<div class="col-md-10">
+			<%= submit_tag "Log In" %>
+		</div>
+	<% end %>
+
+	<div class="col-md-10">
+		<%= link_to "Sign in with Facebook", "/auth/facebook" , id: "log_in" %>
+	</div>
+</div>
+

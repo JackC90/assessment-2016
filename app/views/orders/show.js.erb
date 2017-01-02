@@ -1,0 +1,4 @@
+$(".submit-order").on("click", function(event) {
+  event.preventDefault();
+  $(".order-card").html("<%= render(partial:"orders/card", locals: {order: @order}) %>");
+})

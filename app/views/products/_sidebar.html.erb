@@ -1,0 +1,17 @@
+<div class="sidebar card col-md-3">
+	<div class="card-block">
+		<div class="card-title">
+			<h4>Browse by Category</h4>
+		</div>
+
+		<div class="card-text">	
+			<% Product.categories.each do |cat, val| %>
+				<%= form_for :search, url: products_path, method: "GET", remote: true, html: {class: "category-form"} do |f| %>
+				<%= f.hidden_field :category, value: cat %>
+				<%= f.submit cat.humanize, class: "search-category btn btn-default col-md-12" %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</div>
+

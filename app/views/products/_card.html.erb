@@ -1,0 +1,23 @@
+<div class="product-card card col-md-3">
+  <a href="<%= product_path(product) %>">
+    <img class="card-img-top" src="<%= img_thumb(product) %>" alt="Card image cap" width=120 height=150 >
+    <div class="sale-rent" width=120 height=1em style="color:<%= product.for_sale? ? "green" : "orange" %>">
+      <%= product.sale_or_rent.humanize %>
+    </div>
+  </a>
+  <div class="card-block">
+    <h4 class="card-title"><%= link_to product.title, product_path(product) %></h4>
+    <p class="card-text"><small class="text-muted"><%= product.author %></small></p>
+    <p class="card-text"><%= RM discounted(product) %></p>
+    <p class="card-text"><small class="text-muted"><strike><%= RM product.price %></strike>   -<%= product.discount %>%</small></p>
+    
+  </div>
+  <div class="card-block">
+    <% if user_signed_in? && owner_or_admin?(product) %>
+      <td><%= link_to 'Show', product %> | </td>
+      <td><%= link_to 'Edit', edit_product_path(product) %> | </td>
+      <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+  </div>
+</div>
+

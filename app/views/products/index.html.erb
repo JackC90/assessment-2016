@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<%= render partial:"layouts/carousel" %>
+
+<div class="products-grid container col-md-9" id="products-list">
+	<%= render "products/grid", products: @products %>
+</div>
+
+<%= render partial:"products/sidebar" %>
+
+<script>
+$(".category-form").on("submit", function(event) { 
+	event.preventDefault();
+    // $(this).closest("form").submit(function() {
+     var category = $(this).serialize();
+     debugger
+     $.ajax({
+     	type: "GET",
+     	url: $(this).attr('action'),
+     	data: category,
+     	dataType: "JSON"
+     }).success(function(json) {
+     	
+     	$(".products-grid").html("<%= render "products/grid", products: @products %>")
+     });
+});
+</script>
+

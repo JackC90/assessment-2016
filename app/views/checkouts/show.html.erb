@@ -1,0 +1,40 @@
+<div class="jumbotron">
+  <div class="container">
+    <h3>Thank you for shopping with us!</h3>
+    <p>Payment was successfully made.</p>
+    <p>
+    	<strong>Amount paid:</strong>
+    	<%= RM(@checkout.amount) %>
+    </p>
+    <p>
+    <strong>Customer:</strong>
+    	<%= link_to print_name(@order.user.profile), @order.user.profile %>
+    </p>
+    <p>
+      <strong>Vendor:</strong>
+        <%= link_to print_name(@order.product.user.profile), @order.product.user.profile %>
+    </p>
+    <p>
+      <strong>Product:</strong>
+        <%= link_to @order.product.title, @order.product %>
+    </p>
+    <p>
+      <strong>Quantity:</strong>
+        <%= @order.quantity %>
+    </p>
+
+    <% if @order.product.for_rent? %>
+      <p>
+        <strong>Duration:</strong>
+        <%= @order.duration %> months
+      </p>
+
+      <p>
+        <strong>Due Date:</strong>
+        <%= format_date @order.due_date %>
+      </p>
+  <% end %>
+
+    <p>Date of transaction : <%= @checkout.created_at %></p>
+  </div>
+</div>

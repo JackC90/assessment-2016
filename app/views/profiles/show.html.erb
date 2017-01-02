@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="container col-md-4">
+    <%= image_tag avatar_display(@profile), class: "img-responsive img-circle", width: 300, height: 300 %>
+  </div>
+
+  <div class="container col-md-8">
+    <p>
+      <h3>
+        <strong><%= print_name @profile %></strong>
+      </h3>
+    </p>
+
+    <p>
+      <strong>About Me</strong>
+      <p>
+        <%= @profile.description %>
+      </p>
+    </p>
+    <p>
+      <strong>Phone:</strong>
+      <%= @profile.phone %>
+    </p>
+    <p>
+      <strong>Whatsapp:</strong>
+      <%= @profile.whatsapp ? "Available" : "Not available" %>
+    </p>
+
+    <p>
+      <strong>Birthdate:</strong>
+      <%= format_date @profile.birthdate %>
+    </p>
+
+    <p>
+      <strong>Address:</strong>
+      <%= @profile.address %>
+    </p>
+    <% if owner_or_admin?(@profile) %>
+      <%= link_to 'Edit', edit_profile_path(@profile), class: "btn btn-primary btn-block" %>
+      <%= link_to "My Order List", orders_path, class: "btn btn-success btn-block" %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<div class="products container col-md-12">
+  <h3>
+    <%= print_name(@profile) %>'s Products
+  </h3>
+  <% @products.each do |product| %>
+    <%= render "products/card", product: product %>
+  <% end %>
+  <div class="container col-md-12 text-center">
+    <%= will_paginate @products, renderer: BootstrapPagination::Rails, class: "will_paginate" %>
+    <%= page_entries_info @products %>
+  </div>
+</div>
+
+
