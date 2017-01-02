@@ -56,7 +56,7 @@ def gen_profiles
 		user.profile.update(
 			name: FFaker::Name.name,
 			avatar: FFaker::Avatar.image,
-			description: FFaker::BaconIpsum.paragraph,
+			description: FFaker::CheesyLingo.paragraph,
 			address: FFaker::Address.street_address,
 			birthdate: FFaker::IdentificationESCO.expedition_date - (365 * rand(10..30)),
 			whatsapp: [true, false].sample,
@@ -90,8 +90,8 @@ end
 
 # Uncomment generators below to run ================================
 
-# gen_users
-# gen_profiles
-# gen_products
-# update_academic
+gen_users
+gen_profiles
+gen_products
+update_academic
 gen_rent_duration
