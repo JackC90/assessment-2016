@@ -30,7 +30,7 @@ class User < ApplicationRecord
 	end
 
 	def self.authenticate(username_or_email="", login_password="")
-		user = User.where("username = ? OR email = ?", username_or_email, username_or_email)
+		user = User.where("username = ? OR email = ?", username_or_email, username_or_email).first
 
 		if user && user.match_password(login_password)
 			return user
