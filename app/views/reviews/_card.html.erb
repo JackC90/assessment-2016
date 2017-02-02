@@ -1,0 +1,35 @@
+<div class="review-card card col-md-10">
+  <div class="card-block">
+    <h4 class="card-title"><%= link_to review.title, product_review_path(@product, review) %></h4>
+    <p class="card-text"><small class="text-muted">By <%= link_to print_name(review.user.profile), profile_path(review.user.profile) %></small></p>
+    <p class="card-text">
+      <strong>Rating: </strong>
+      <% review.rating.times do %>
+        <span class="glyphicon glyphicon-star">
+      <% end %>
+      <% (5 - review.rating).times do %>
+        <span class="glyphicon glyphicon-star-empty">
+      <% end %>
+    </p>
+    <p class="card-text">
+      <%= review.text %>
+    </p>    
+  </div>
+
+  <div class="card-block">
+    <% if user_signed_in? && owner_or_admin?(review) %>
+    <!-- Edit Review Modal -->
+      <button id="image-btn-<%= review.id %>" data-toggle=modal data-target=".bs-example-modal-lg-<%= review.id %>" class="btn btn-success col-md-3">Edit</button>
+      
+      <div class="modal fade bs-example-modal-lg-<%= review.id %>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <%= render "reviews/edit", review: review %>
+          </div>
+        </div>
+      </div>
+      <%= link_to('Delete', [@product, review], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger col-md-3") %>
+    <% end %>
+  </div>
+</div>
+

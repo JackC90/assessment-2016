@@ -10,7 +10,7 @@ module ApplicationHelper
 	def print_name(profile)
 		if profile.class.name == "Profile"
 			profile.name || profile.user.name || profile.user.username || "Visitor"
-		elsif profile.class.name == "User"
+		else profile.class.name == "User"
 			profile.profile.name || "Visitor"
 		end
 	end

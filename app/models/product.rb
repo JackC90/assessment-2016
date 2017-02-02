@@ -7,6 +7,7 @@ class Product < ApplicationRecord
 	belongs_to :user
 	has_many :orders, dependent: :destroy
 	has_many :customers, through: :orders, source: :users
+	has_many :reviews
 	mount_uploaders :product_images, ProductImagesUploader
 
 	validates :title, presence: true

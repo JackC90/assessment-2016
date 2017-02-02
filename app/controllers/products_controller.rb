@@ -17,10 +17,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def by_category
-
-  end
-
   # GET /products/1
   # GET /products/1.json
   def show
@@ -29,8 +25,17 @@ class ProductsController < ApplicationController
 
       # Related products bar
       filtering_params = {category: @product.category}
-      @products = Product.filter(filtering_params).limit(8)
-      @products = @products.order("updated_at DESC").paginate(page: params[:page], per_page: 5)
+      @products = Product.filter(filtering_params).limit(4)
+      @products = @products.order("updated_at DESC").paginate(page: params[:page], per_page: 4)
+      
+      # Review section
+      @reviews = @product.reviews.order("updated_at DESC").paginate(page: params[:page], per_page: 8)
+      @review = @product.reviews.new(user_id: current_user.id)
+
+      respond_to do |format|
+        format.html
+        format.js
+      end
   end
 
   # GET /products/new

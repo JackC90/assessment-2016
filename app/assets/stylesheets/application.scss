@@ -180,6 +180,16 @@ header.carousel .fill {
     box-shadow: none;
     border-color: #ccc;
 }
+
+.panel-body {
+    margin: 0 auto;
+}
+
+ul.nav.navbar-nav {
+    margin: 0 auto;
+    padding-left: 2em
+}
+
 .btn-group {
     background-color: #59B2E0 ;
     outline: none;
@@ -313,4 +323,11 @@ header.carousel .fill {
 .sidebar .card-text form .btn-default {
     font-size: 1.1em;
     font-weight: bold;
+}
+
+.new-review, .edit-review {
+    width: 90%;
+    padding: 2em;
+    background: white;
+    border-radius: 5%
 }

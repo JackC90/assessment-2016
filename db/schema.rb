@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161225031242) do
+ActiveRecord::Schema.define(version: 20170130025627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,18 @@ ActiveRecord::Schema.define(version: 20161225031242) do
     t.index ["user_id"], name: "index_profiles_on_user_id", using: :btree
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.string   "title"
+    t.text     "text"
+    t.integer  "rating"
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id", using: :btree
+    t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
@@ -97,4 +109,6 @@ ActiveRecord::Schema.define(version: 20161225031242) do
   add_foreign_key "orders", "users"
   add_foreign_key "products", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
 end

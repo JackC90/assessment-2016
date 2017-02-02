@@ -3,10 +3,19 @@
     <%= render "products/card", product: product %>
 <% end %>
 <div class="container col-md-12 text-center">
-	<%= will_paginate products, renderer: BootstrapPagination::Rails, class: "will_paginate text-center" %>
+	<%= will_paginate products, renderer: BootstrapPagination::Rails, class: "will_paginate text-center"  %>
 	<%= page_entries_info products%>
 </div>
 
+<script>
+$(function() {
+  $("#products-list .pagination a").on("click", function(){
+    $.getScript(this.href);
+    return false;
+  });
+});
+
+</script>
 
 
 

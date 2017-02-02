@@ -8,21 +8,6 @@
 
 <%= render partial:"products/sidebar" %>
 
-<script>
-$(".category-form").on("submit", function(event) { 
-	event.preventDefault();
-    // $(this).closest("form").submit(function() {
-     var category = $(this).serialize();
-     debugger
-     $.ajax({
-     	type: "GET",
-     	url: $(this).attr('action'),
-     	data: category,
-     	dataType: "JSON"
-     }).success(function(json) {
-     	
-     	$(".products-grid").html("<%= render "products/grid", products: @products %>")
-     });
-});
-</script>
+
+
 

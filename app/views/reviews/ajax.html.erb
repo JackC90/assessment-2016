@@ -1,0 +1,19 @@
+$(function() {
+	$(".submit-button").on("click", function(event){
+ 		event.preventDefault();
+	 	$form 	= $(this).parent().parent();
+	 	$modal 	= $(this).parentsUntil(".modal").parent()
+	    $.ajax({
+	    	type: "POST",
+			url: $form.attr('action'),
+			data: $form.serialize(),
+		    success: function(){
+		    	$('.modal').modal('hide');
+		    },
+			error: function(){
+				alert("Error on submitting review.");
+			}
+	    });
+ 	});
+});
+

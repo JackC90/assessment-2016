@@ -13,6 +13,7 @@ class User < ApplicationRecord
 	has_many :products, dependent: :destroy
 	has_many :orders, dependent: :destroy
 	has_many :transactions, through: :orders, source: :products
+	has_many :reviews
 
 
 	enum role: [:normal, :admin]

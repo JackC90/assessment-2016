@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
+  
   resources :orders, only: [:index, :show, :create, :destroy] do
     resources :checkouts, only: [:new, :create, :show]
   end
+
   resources :profiles, except: [:index, :new]
-  resources :products
+  
+  resources :products do
+    resources :reviews
+  end
 
   # Sessions
   get 'sessions/login'
@@ -17,9 +22,6 @@ Rails.application.routes.draw do
 
   # Browse by Categories
   get 'category' => 'products#by_category'
-
-  # Order
-  # get 'orders_card/:id' => 'orders#card', as: 'order_card', defaults: { formats: "js" }
 
   # get 'users/new'
   resources :users, only: [:new, :create, :delete]
