@@ -40,9 +40,11 @@
     <%= RM @order.price %>
   </p>
 
-  <%= link_to 'Cancel Order', @order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" %>
-
+  <% unless @order.paid %>
+    <%= link_to 'Cancel Order', @order, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-warning" %>
   <%= link_to "Pay Now", new_order_checkout_path(@order), class: "btn btn-success" %>
-
+  <% else %>
+    <a href="<%=order_checkout_path(@order, @order.checkouts.last)%>">Payment has been made on <%= @order.checkouts.last.created_at %></p>
+  <% end %>
   <%= link_to('Payment Index', orders_path, class: "btn btn-primary") if user_signed_in? && current_user.admin? %>
 </div>
