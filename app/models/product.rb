@@ -32,4 +32,13 @@ class Product < ApplicationRecord
 	scope :language, 		-> (language) { where(language: language)}
 	scope :academic, 		-> { where("category <= ?", 5) }
 	scope :fiction, 		-> { where("category > ?", 5) }
+
+	def average_rating
+		average = self.reviews.average(:rating)
+		if average.nil?
+			average = 0
+		else
+			average.round
+		end
+	end
 end

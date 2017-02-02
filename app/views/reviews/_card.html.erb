@@ -1,4 +1,4 @@
-<div class="review-card card col-md-10">
+<div class="review-card card col-md-10" id="review-card-<%= review.id %>">
   <div class="card-block">
     <h4 class="card-title"><%= link_to review.title, product_review_path(@product, review) %></h4>
     <p class="card-text"><small class="text-muted">By <%= link_to print_name(review.user.profile), profile_path(review.user.profile) %></small></p>
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <%= link_to('Delete', [@product, review], method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger col-md-3") %>
+      <%= link_to('Delete', [@product, review], method: :delete, data: { confirm: 'Are you sure?' }, class: "delete-review-#{review.id} btn btn-danger col-md-3") %>
     <% end %>
   </div>
 </div>

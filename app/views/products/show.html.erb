@@ -20,6 +20,15 @@
       <h3>
         <strong><%= @product.title %></strong>
       </h3>  
+      <div>
+        <strong>Product Rating: </strong>
+        <% @average.times do %>
+          <span class="glyphicon glyphicon-star">
+        <% end %>
+        <% (5 - @average).times do %>
+          <span class="glyphicon glyphicon-star-empty">
+        <% end %>
+      </div>
     </p>
 
     <p>

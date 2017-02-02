@@ -27,8 +27,7 @@ class ReviewsController < ApplicationController
     @review = @product.reviews.new(review_params.merge(user_id: current_user.id))
 
     respond_to do |format|
-      if @review.save
-        
+      if @review.save 
         format.html { redirect_to @product, notice: 'Review was successfully created.' }
         format.json { render :show, status: :created, location: @review }
         format.js
@@ -44,7 +43,6 @@ class ReviewsController < ApplicationController
   def update
     respond_to do |format|
       if @review.update(review_params)
-        
         format.html { redirect_to @product, notice: 'Review was successfully updated.' }
         format.json { render :show, status: :ok, location: @review }
         format.js
@@ -62,6 +60,7 @@ class ReviewsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @product, notice: 'Review was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 

@@ -29,8 +29,9 @@ class ProductsController < ApplicationController
       @products = @products.order("updated_at DESC").paginate(page: params[:page], per_page: 4)
       
       # Review section
-      @reviews = @product.reviews.order("updated_at DESC").paginate(page: params[:page], per_page: 8)
-      @review = @product.reviews.new(user_id: current_user.id)
+      @reviews  = @product.reviews.order("updated_at DESC").paginate(page: params[:page], per_page: 8)
+      @review   = @product.reviews.new(user_id: current_user.id)
+      @average  = @product.average_rating
 
       respond_to do |format|
         format.html
