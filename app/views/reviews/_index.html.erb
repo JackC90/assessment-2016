@@ -2,7 +2,12 @@
   Reviews
 </h3>
 <!-- New Comment Modal -->
-<button id="image-btn" data-toggle=modal data-target=".bs-example-modal-lg" class="btn btn-primary btn-block">Write A Review</button>
+<% if user_signed_in? && @reviews.find_by(user_id: current_user.id).nil? %>
+	<button id="new-review-btn" data-toggle=modal data-target=".bs-example-modal-lg" class="btn btn-primary btn-block">Write A Review</button>
+<% else %>
+	<p id="review-submitted">You have submitted a review.</p>
+<% end %>
+
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
