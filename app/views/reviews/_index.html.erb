@@ -2,20 +2,24 @@
   Reviews
 </h3>
 <!-- New Comment Modal -->
-<% if user_signed_in? && @reviews.find_by(user_id: current_user.id).nil? %>
+<% if !user_signed_in? %>
+	<p>Sign in to review this product!</p>
+<% elsif @reviews.find_by(user_id: current_user.id).nil? %>
 	<button id="new-review-btn" data-toggle=modal data-target=".bs-example-modal-lg" class="btn btn-primary btn-block">Write A Review</button>
+	
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	      <%= render "reviews/new" %>
+	    </div>
+	  </div>
+	</div>
 <% else %>
 	<p id="review-submitted">You have submitted a review.</p>
 <% end %>
 
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <%= render "reviews/new" %>
-    </div>
-  </div>
-</div>
 
-<%= render partial:"reviews/list" %>
+
+<%= render partial:"reviews/list" if @reviews.present? %>
 
 

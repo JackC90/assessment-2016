@@ -108,7 +108,7 @@
 
 
 <div class="card col-md-3">
-  <%= render(partial:"orders/new") if @order %>
+  <%= render(partial:"orders/new") if @order && current_user.present? %>
 </div>
 
 <div class="order-card container col-md-3">
